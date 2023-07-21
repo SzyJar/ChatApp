@@ -1,0 +1,35 @@
+{% extends 'core/index.html' %}
+
+{% block title %}Sign up | {% endblock %}
+
+{% block content %}
+<div>
+    <h1>Sign up</h1>
+</div>
+
+<form method="post" action=".">
+    {% csrf_token %}
+
+    <label>Username</label>
+    <input type="text" name="username">
+
+    <label>Password</label>
+    <input type="password" name="password1">
+
+    <label>Repeat password</label>
+    <input type="password" name="password2">
+
+    <button>Submit</button>
+
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %} 
+                <div>
+                    <p>{{ error|escape }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    
+</form>
+{% endblock %}

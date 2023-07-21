@@ -1,0 +1,20 @@
+{% extends 'core/index.html' %}
+
+{% block title %}Chat Rooms | {% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Chat rooms</h1>
+</div>
+
+<div>
+    {% for room in rooms %}
+        <div>
+            {{ room.name }}
+            <a href="{% url 'room' room.slug %}">JOIN</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
