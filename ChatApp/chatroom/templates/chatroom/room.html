@@ -1,6 +1,6 @@
 {% extends 'core/index.html' %}
 
-{% block title %}{{ rooms.name }}| {% endblock %}
+{% block title %}{{ rooms.name }} | {% endblock %}
 
 {% block content %}
 
@@ -38,10 +38,15 @@
         + '/'
     );
 
+    chatSocket.onopen = function (e) {
+        console.log("Connection was setup successfully!");
+      };
+
     chatSocket.onclose = function(e) {
         console.log('Socket closed unexpectedly');
-    }
+    };
 
+    document.querySelector('#chat-message-input').focus();
     document.querySelector('#chat-message-submit').onclick = function(e) {
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
@@ -53,11 +58,18 @@
                 'room': roomName,
             }));
         } else {
-            alert('Message empty');
-        }
+            alert('You cannot submit empty message');
+        };
 
         messageInputDom.value = '';
-    }
+    };
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        document.querySelector('#chat-messages').innerHTML += (
+            '<p>' + data.username + '</p><p> ' + data.message + '</p>'
+            );
+    };
 
 </script>
 {% endblock %}
