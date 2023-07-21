@@ -9,8 +9,6 @@
 </div>
 
 <div id="chat-messages">
-    <p>Username</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     {% for message in messages %}
     <p>{{ message.user.username }}</p>
     <p>{{ message.content }}</p>
@@ -30,7 +28,6 @@
 {{ rooms.slug|json_script:"json-roomname" }}
 {{ request.user.username|json_script:"json-username" }}
 <script>
-    console.log('start');
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
     const userName = JSON.parse(document.getElementById('json-username').textContent);
     const chatSocket = new WebSocket(
@@ -41,34 +38,23 @@
         + '/'
     );
 
-    chatSocket.onmessage = function(e) {
-        console.log('onmessage');
-
-        const data = JSON.parse(e.data);
-
-        if (data.message) {
-            let html = '<div><p>' + data.username + '</p>';
-            html += '<p>' + data.message + '</p><div>';
-            
-            document.querySelector('#chat-messages').innerHTML += html;
-        } else {
-            alert('Message empty');
-        }
-    }
-
     chatSocket.onclose = function(e) {
-        console.log('Room socket closed unexpectedly');
+        console.log('Socket closed unexpectedly');
     }
 
     document.querySelector('#chat-message-submit').onclick = function(e) {
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
 
-        chatSocket.send(JSON.stringify({
-            'message': message,
-            'username': userName,
-            'room': roomName,
-        }));
+        if(message) {
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'username': userName,
+                'room': roomName,
+            }));
+        } else {
+            alert('Message empty');
+        }
 
         messageInputDom.value = '';
     }

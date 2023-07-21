@@ -12,7 +12,8 @@
     {% for room in rooms %}
         <div>
             {{ room.name }}
-            <a href="{% url 'room' room.slug %}">JOIN</a>
+            <a href="{% url 'room' room.slug %}"><button>JOIN</button></a>
+            <a href="{% url 'clear_room' room.slug %}"><button>CLEAR ROOM</button></a>
         </div>
     {% endfor %}
 </div>
