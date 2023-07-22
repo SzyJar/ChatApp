@@ -8,9 +8,9 @@
     <h1>Chat rooms</h1>
 </div>
 
-<div>
+<div class="container">
     {% for room in rooms %}
-        <div>
+        <div class="room">
             {{ room.name }}
             <a href="{% url 'room' room.slug %}"><button>JOIN</button></a>
             <a href="{% url 'clear_room' room.slug %}"><button>CLEAR ROOM</button></a>

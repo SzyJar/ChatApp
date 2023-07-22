@@ -10,15 +10,17 @@
 
 <div id="chat-messages">
     {% for message in messages %}
-    <p>{{ message.user.username }}</p>
-    <p>{{ message.content }}</p>
+    <div class="message-container">
+    <p class="username">{{ message.user.username }}:</p>
+    <p class="message">{{ message.content }}</p>
+</div>
     {% endfor %}
 </div>
 
-<div>
+<div class="type-in-chat-box">
     <form method="post" action=".">
         {% csrf_token %}
-        <input type="text" name="content" placeholder="..." id="chat-message-input" />
+        <input class="inputBox" type="text" name="content" placeholder="..." id="chat-message-input" />
         <button id="chat-message-submit">Submit</button>
     </form>
 </div>
@@ -39,7 +41,7 @@
     );
 
     chatSocket.onopen = function (e) {
-        console.log("Connection was setup successfully!");
+        console.log("Connection was setup successfully");
       };
 
     chatSocket.onclose = function(e) {
@@ -48,6 +50,7 @@
 
     document.querySelector('#chat-message-input').focus();
     document.querySelector('#chat-message-submit').onclick = function(e) {
+        e.preventDefault();
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
 
@@ -67,8 +70,11 @@
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         document.querySelector('#chat-messages').innerHTML += (
-            '<p>' + data.username + '</p><p> ' + data.message + '</p>'
+            '<div class="message-container"><p class="username">'
+                 + data.username + '</p><p class="message"> '
+                 + data.message + '</p></div>'
             );
+        window.scrollTo(0, document.body.scrollHeight); 
     };
 
 </script>

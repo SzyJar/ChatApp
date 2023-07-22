@@ -9,24 +9,23 @@
 
 <form method="post" action=".">
     {% csrf_token %}
-
-    <label>Username</label>
-    <input type="text" name="username">
-
-    <label>Password</label>
-    <input type="password" name="password">
-
-    <button>Submit</button>
-
+    <div class="container">
+        <div>
+            <div>
+                <label>Username: </label>
+                <input class="inputBox" type="text" name="username" class="input-box" />
+            </div>
+            <div>
+                <label>Password: </label>
+                <input class="inputBox" type="password" name="password" class="input-box" />
+            </div>
+            <button>Submit</button>
+        </div>
+    </div>
+    <div>
     {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %} 
-                <div>
-                    <p>{{ error|escape }}</p>
-                </div>
-            {% endfor %}
-        {% endfor %}
+    Login data is not correct
     {% endif %}
-    
+    </div>
 </form>
 {% endblock %}
