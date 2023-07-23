@@ -9,23 +9,24 @@
 
 <form method="post" action=".">
     {% csrf_token %}
-    <div class="container">
-        <div>
+    <div class="center">
+        <div class="container-login">
             <div>
-                <label>Username: </label>
-                <input class="inputBox" type="text" name="username">
-            </div>
-            <div>
-                <label>Password: </label>
-                <input class="inputBox" type="password" name="password1">
-            </div>
-            <div>
-                <label>Repeat password: </label>
-                <input class="inputBox" type="password" name="password2">
+                <div>
+                    <label>Username: </label>
+                    <input class="inputBox" type="text" name="username">
+                </div>
+                <div>
+                    <label>Password: </label>
+                    <input class="inputBox" type="password" name="password1">
+                </div>
+                <div>
+                    <label>Repeat password: </label>
+                    <input class="inputBox" type="password" name="password2">
+                </div>
+                <button>Sign up</button>
             </div>
         </div>
-
-        <button>Sign up</button>
     </div>
 
     {% if form.errors %}

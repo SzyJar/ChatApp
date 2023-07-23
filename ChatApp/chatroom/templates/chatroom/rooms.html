@@ -7,15 +7,15 @@
 <div>
     <h1>Chat rooms</h1>
 </div>
-
-<div class="container">
-    {% for room in rooms %}
-        <div class="room">
-            {{ room.name }}
-            <a href="{% url 'room' room.slug %}"><button>JOIN</button></a>
-            <a href="{% url 'clear_room' room.slug %}"><button>CLEAR ROOM</button></a>
-        </div>
-    {% endfor %}
+<div class="center">
+    <div class="container">
+        {% for room in rooms %}
+            <div class="room">
+                {{ room.name }}
+                <a href="{% url 'room' room.slug %}"><button>Join room</button></a>
+                <a href="{% url 'clear_room' room.slug %}"><button>Clear room</button></a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
-
 {% endblock %}

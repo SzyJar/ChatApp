@@ -10,8 +10,22 @@ from .. import models as mymodels
 
 
 def populate_rooms(apps, schema_editor):
-    rooms = ['First room', 'Second room', 'Third room']
-    slugs = ['room1', 'room2', 'room3']
+    rooms = [
+        'First room',
+        'Second room',
+        'Third room',
+        'Python enthusiasts',
+        'Java enthusiasts',
+        'Rate my poem',
+    ]
+    slugs = [
+        'room1',
+        'room2',
+        'room3',
+        'python',
+        'js',
+        'poem',
+    ]
     for i in range(len(rooms)):
         obj = mymodels.Room(name=rooms[i], slug=slugs[i])
         obj.save()
